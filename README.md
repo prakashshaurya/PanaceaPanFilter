@@ -9,5 +9,5 @@ Pandoc Filter Collection
    
    Make sure that  all the files are mentioned with completely qualified filenames.
    
-   While copying the query from here , make sure that  the query shouldnt have the leading ':', otherwise error ** not enough input **
+   While copying the query from here , make sure that  the query shouldnt have the leading ':', otherwise error ***not enough input***
    will be flagged by pandoc.
