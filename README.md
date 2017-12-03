@@ -7,6 +7,7 @@ Pandoc Filter Collection
   example :
    pandoc -f html client.html  -t json | runhaskell LinkStriker.hs |   pandoc -f json -tdocx -o  fff.docx
    
-   Be sure that your mentioning all the files with completely qualified filenames.
-   If you are copying the query from here , make sure ayour query shouldnt have the leading ':', otherwise error : not enough input
+   Make sure that  all the files are mentioned with completely qualified filenames.
+   
+   While copying the query from here , make sure that  the query shouldnt have the leading ':', otherwise error ** not enough input **
    will be flagged by pandoc.
