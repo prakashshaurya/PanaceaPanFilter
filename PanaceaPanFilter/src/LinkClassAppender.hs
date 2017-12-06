@@ -55,5 +55,3 @@ getClass :: (String, [String], [(String, String)]) -> [String]
 getClass (x,y,z) = y
 
 
-main = do 
-         print (getLinkAttributeClass ( Link ("Id", ["Classname"], [("Key","Value")]) [Str "ssssss"] ("url","target")))
