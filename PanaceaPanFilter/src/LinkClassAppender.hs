@@ -5,55 +5,42 @@ import Text.Pandoc.Definition
 import Text.Pandoc.JSON
                 
 -- main :: IO ()
--- main = toJSONFilter boldmarker  
+-- main = toJSONFilter app  
               
 
-
-getLinkaltText :: Inline -> Maybe [Inline]
-getLinkaltText (Link  z xs y) =  Just xs
-getLinkaltText x  =  Nothing
-
---get Target Tuple
-getLinkTarget :: Inline -> Maybe(String, String)
-getLinkTarget (Link  z xs y) =  Just y
-getLinkTarget x  =  Nothing
+ 
+ 
 
 --get Attr
 getLinkAttribute :: Inline -> Maybe (String, [String], [(String, String)])  
 getLinkAttribute (Link  z xs y) =  Just z
 getLinkAttribute x  =  Nothing
 
---get id
-getLinkId ::Inline -> Maybe String
-getLinkId  (Link  z xs y) = case getLinkAttribute (Link  z xs y) of 
-                                 Just z -> Just $  getId z
-                                 Nothing ->Nothing 
-getLinkId x = Nothing
-
---get key value
-getLinkAttributeKV ::Inline ->Maybe [(String,String)]
-getLinkAttributeKV  (Link  z xs y) = case getLinkAttribute (Link  z xs y) of 
-                                 Just z -> Just $  getKeyValue z
-                                 Nothing ->Nothing 
-getLinkAttributeKV x = Nothing
 
 --get class
-getLinkAttributeClass ::Inline ->Maybe [String]
+getLinkAttributeClass ::Inline -> Maybe [String]
 getLinkAttributeClass  (Link  z xs y) = case getLinkAttribute (Link  z xs y) of 
                                  Just z -> Just $  getClass z
-                                 Nothing ->Nothing 
+                                 Nothing ->Nothing
 getLinkAttributeClass x = Nothing
- 
- 
-getId :: (String, [String], [(String, String)]) -> String 
-getId (x,y,z) = x
 
-getKeyValue :: (String, [String], [(String, String)]) -> [(String, String)]
-getKeyValue (x,y,z) = z
 
 getClass :: (String, [String], [(String, String)]) -> [String]
 getClass (x,y,z) = y
 
 
+
+appendClass:: Inline -> Inline
+appendClass  (Link  (p,q,r)  xs y)  = case (getLinkAttributeClass (Link  (p,q,r) xs y)) of 
+                                   Just [x] ->   (Link  (p,[x]++["newClassName"],r) xs y)
+                                   Just[] ->     (Link  (p,["newClassName"],r) xs y)
+appendClass x = x
+
+-- appendClass:: Inline -> Inline
+-- appendClass  (Link  z xs y)  = case (getLinkAttributeClass (Link  z xs y)) of 
+--                                    Just [x] ->   Link  z (map(\x-> (Str x)) [x]) y
+--                                    Just[] ->   (Link  z [Str "d"] y)
+-- appendClass x = x
+
 main = do 
-         print (getLinkAttributeClass ( Link ("Id", ["Classname"], [("Key","Value")]) [Str "ssssss"] ("url","target")))
+         print (appendClass  (  Link ("Id", ["Classname"], [("Key","Value")]) [Str "ssssss"] ("url","target")))
