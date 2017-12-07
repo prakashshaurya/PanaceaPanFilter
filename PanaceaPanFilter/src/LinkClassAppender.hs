@@ -29,18 +29,8 @@ getClass :: (String, [String], [(String, String)]) -> [String]
 getClass (x,y,z) = y
 
 
-
 appendClass:: Inline -> Inline
 appendClass  (Link  (p,q,r)  xs y)  = case (getLinkAttributeClass (Link  (p,q,r) xs y)) of 
                                    Just [x] ->   (Link  (p,[x]++["newClassName"],r) xs y)
                                    Just[] ->     (Link  (p,["newClassName"],r) xs y)
 appendClass x = x
-
--- appendClass:: Inline -> Inline
--- appendClass  (Link  z xs y)  = case (getLinkAttributeClass (Link  z xs y)) of 
---                                    Just [x] ->   Link  z (map(\x-> (Str x)) [x]) y
---                                    Just[] ->   (Link  z [Str "d"] y)
--- appendClass x = x
-
-main = do 
-         print (appendClass  (  Link ("Id", ["Classname"], [("Key","Value")]) [Str "ssssss"] ("url","target")))
