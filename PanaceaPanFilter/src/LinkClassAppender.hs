@@ -1,11 +1,11 @@
-module LinkBoldMarker where
+module LinkClassAppender where
 import Text.Pandoc.Builder
 import Text.Pandoc.Generic
 import Text.Pandoc.Definition
 import Text.Pandoc.JSON
                 
--- main :: IO ()
--- main = toJSONFilter app  
+main :: IO ()
+main = toJSONFilter appendClass  
               
 
  
